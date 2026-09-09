@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boards - App</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard-page">
+    <header class="global-header">
+        <div class="header-left">
+            <div class="header-logo">BoardApp</div>
+        </div>
+        <div class="header-right">
+            <div class="notifications-dropdown">
+                <button id="notif-btn" class="header-btn icon-btn">
+                    🔔 <span id="notif-badge" style="display:none;">0</span>
+                </button>
+                <div id="notif-list" class="dropdown-content"></div>
+            </div>
+            <img id="user-avatar" class="avatar" src="" alt="Avatar">
+            <button onclick="logout()" class="header-btn">Logout</button>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="active">Boards</a>
+            </nav>
+        </aside>
+
+        <main class="content-area">
+            <div class="container">
+                <div class="page-header">
+                    <h2><span style="margin-right:8px">⏱</span>Your workspaces</h2>
+                </div>
+                
+                <div id="projects-grid" class="boards-grid">
+                    <!-- Boards injected here -->
+                </div>
+                
+                <div class="boards-grid" style="margin-top: 20px;">
+                    <div class="board-card create-board-card" onclick="openModal('create-board-modal')">
+                        Create new board
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Board Modal -->
+    <div id="create-board-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('create-board-modal')">&times;</span>
+            <h2>Create board</h2>
+            <form id="create-project-form">
+                <div class="input-group">
+                    <label>Board title</label>
+                    <input type="text" id="project-name" required>
+                </div>
+                <div class="input-group">
+                    <label>Background color</label>
+                    <select id="board-color">
+                        <option value="#0079BF">Blue</option>
+                        <option value="#D29034">Orange</option>
+                        <option value="#519839">Green</option>
+                        <option value="#B04632">Red</option>
+                        <option value="#89609E">Purple</option>
+                        <option value="#CD5A91">Pink</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" style="width:100%; margin-top: 10px;">Create</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

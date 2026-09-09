@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board App - Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <h1>Board App</h1>
+        <p class="auth-subtitle">Log in to Trello-clone</p>
+        
+        <div class="tabs">
+            <button id="tab-login" class="active" onclick="switchTab('login')">Log in</button>
+            <button id="tab-signup" onclick="switchTab('signup')">Sign up</button>
+        </div>
+
+        <form id="login-form">
+            <div class="input-group">
+                <input type="email" id="login-email" placeholder="Enter email" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="login-password" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="btn-primary">Log in</button>
+            <p class="demo-hint">Demo: demo@boardapp.com / demo1234</p>
+        </form>
+
+        <form id="signup-form" style="display: none;">
+            <div class="input-group">
+                <input type="text" id="signup-username" placeholder="Enter username" required>
+            </div>
+            <div class="input-group">
+                <input type="email" id="signup-email" placeholder="Enter email" required>
+            </div>
+            <div class="input-group">
+                <input type="password" id="signup-password" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="btn-primary">Sign up</button>
+        </form>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

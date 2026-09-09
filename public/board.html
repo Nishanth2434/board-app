@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="board-page">
+    <header class="global-header">
+        <div class="header-left">
+            <a href="dashboard.html" class="header-btn icon-btn">🏠</a>
+            <div class="header-logo">BoardApp</div>
+        </div>
+        <div class="header-right">
+            <div class="notifications-dropdown">
+                <button id="notif-btn" class="header-btn icon-btn">
+                    🔔 <span id="notif-badge" style="display:none;">0</span>
+                </button>
+                <div id="notif-list" class="dropdown-content"></div>
+            </div>
+            <img id="user-avatar" class="avatar" src="" alt="Avatar">
+            <button onclick="logout()" class="header-btn">Logout</button>
+        </div>
+    </header>
+
+    <div class="board-sub-header">
+        <h2 id="board-title" class="board-name">Board Name</h2>
+        <span style="color:white; opacity: 0.5;">|</span>
+        <div class="members-avatars" id="project-members"></div>
+        <button onclick="openModal('add-member-modal')" class="board-header-btn">Invite</button>
+    </div>
+
+    <div class="board-canvas" id="board-canvas">
+        <div id="board-columns" class="lists-container">
+            <!-- Lists injected here -->
+        </div>
+        <div class="add-list-wrapper">
+            <button class="add-list-btn" onclick="addColumn()">+ Add another list</button>
+        </div>
+    </div>
+
+    <!-- Card Modal -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content card-detail">
+            <span class="close-btn" onclick="closeModal('task-modal')">&times;</span>
+            <div class="modal-header-trello">
+                <span class="modal-icon">📝</span>
+                <div style="flex:1">
+                    <input type="text" id="task-detail-title" class="trello-title-input" onblur="saveTaskDetail()">
+                    <div class="in-list-text">in list <span id="task-detail-list-name" style="text-decoration: underline;"></span></div>
+                </div>
+            </div>
+            
+            <div class="card-layout">
+                <div class="card-main">
+                    <div class="card-module">
+                        <h3 class="module-title">Labels</h3>
+                        <div id="task-detail-labels-container" class="labels-container"></div>
+                        <button class="trello-btn" onclick="promptAddLabel()">+ Add Label</button>
+                    </div>
+
+                    <div class="card-module">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span class="modal-icon">≡</span>
+                            <h3 class="module-title" style="margin:0;">Description</h3>
+                        </div>
+                        <textarea id="task-detail-desc" class="trello-textarea" onblur="saveTaskDetail()" placeholder="Add a more detailed description..."></textarea>
+                    </div>
+
+                    <div class="card-module">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span class="modal-icon">💬</span>
+                            <h3 class="module-title" style="margin:0;">Activity</h3>
+                        </div>
+                        <form id="comment-form" class="comment-form-trello">
+                            <input type="text" id="comment-text" placeholder="Write a comment..." required>
+                            <button type="submit" class="btn-primary">Save</button>
+                        </form>
+                        <div id="comments-list" class="activity-feed"></div>
+                    </div>
+                </div>
+                
+                <div class="card-sidebar">
+                    <h4 class="sidebar-title">Add to card</h4>
+                    <button class="sidebar-btn" onclick="promptAssignee()">👤 Members</button>
+                    <button class="sidebar-btn" onclick="promptDueDate()">⏰ Due Date</button>
+                    <button class="sidebar-btn" onclick="deleteTask()" style="margin-top:20px; color:#c92a2a;">🗑 Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Member Modal -->
+    <div id="add-member-modal" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <span class="close-btn" onclick="closeModal('add-member-modal')">&times;</span>
+            <h2 style="margin-bottom: 20px; font-size:1.2rem; text-align:center;">Invite to board</h2>
+            <form id="add-member-form">
+                <input type="text" id="member-email-username" placeholder="Email address or username" required class="trello-input">
+                <button type="submit" class="btn-primary" style="width:100%; margin-top: 10px;">Send invitation</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/board.js"></script>
+</body>
+</html>

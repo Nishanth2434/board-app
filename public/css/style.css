@@ -1,0 +1,744 @@
+:root {
+  --trello-blue: #026AA7;
+  --trello-light-blue: #0079BF;
+  --list-bg: #ebecf0;
+  --card-bg: #ffffff;
+  --text-main: #172b4d;
+  --text-muted: #5e6c84;
+  --btn-primary: #0079BF;
+  --btn-primary-hover: #026aa7;
+  
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: var(--text-main);
+  font-size: 14px;
+  line-height: 20px;
+  background: #fafbfc;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Auth Page */
+.auth-page {
+  background: #f9fafc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-container {
+  background: white;
+  padding: 40px;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 400px;
+  text-align: center;
+}
+
+.auth-container h1 {
+  font-size: 24px;
+  color: var(--text-main);
+  margin-bottom: 5px;
+}
+
+.auth-subtitle {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: var(--text-muted);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  color: var(--trello-blue);
+  border-bottom: 2px solid var(--trello-blue);
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #dfe1e6;
+  border-radius: 3px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+  border-color: var(--trello-blue);
+  outline: none;
+}
+
+.btn-primary {
+  background-color: #5aac44;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background-color: #61bd4f;
+}
+
+/* Global Header */
+.global-header {
+  height: 40px;
+  background-color: var(--trello-blue);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-btn {
+  background: rgba(255,255,255,0.3);
+  border: none;
+  border-radius: 3px;
+  color: white;
+  font-weight: bold;
+  height: 32px;
+  padding: 0 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.header-btn:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+.icon-btn {
+  width: 32px;
+  padding: 0;
+  justify-content: center;
+}
+
+.header-logo {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: 0 10px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #dfe1e6;
+}
+
+/* Dashboard Layout */
+.dashboard-page {
+  background: #fafbfc;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background: white;
+  border-right: 1px solid #dfe1e6;
+  padding: 40px 10px;
+}
+
+.sidebar-nav a {
+  display: block;
+  padding: 8px 12px;
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 3px;
+  background: #e4f0f6;
+  color: var(--trello-blue);
+}
+
+.content-area {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+}
+
+.boards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.board-card {
+  height: 100px;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  padding: 10px;
+}
+
+.board-card-fade {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.15);
+  transition: background 0.2s;
+}
+
+.board-card:hover .board-card-fade {
+  background: rgba(0,0,0,0.3);
+}
+
+.board-card-title {
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  z-index: 1;
+}
+
+.create-board-card {
+  background: #f0f2f5;
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-board-card:hover {
+  background: #e4e6ea;
+}
+
+/* Board Layout */
+.board-page {
+  /* background dynamically set by js */
+}
+
+.board-sub-header {
+  height: 44px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0,0,0,0.24);
+}
+
+.board-name {
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.board-header-btn {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.board-header-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.members-avatars {
+  display: flex;
+}
+
+.members-avatars .avatar {
+  width: 28px;
+  height: 28px;
+  margin-right: -4px;
+  border: 1px solid white;
+}
+
+/* Canvas / Lists */
+.board-canvas {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  align-items: flex-start;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.lists-container {
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.list-wrapper {
+  width: 272px;
+  margin-right: 10px;
+  flex-shrink: 0;
+  max-height: 100%;
+  display: flex;
+}
+
+.list-content {
+  background: var(--list-bg);
+  border-radius: 3px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+.list-header {
+  padding: 10px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-header-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 4px 8px;
+}
+
+.list-header-extras {
+  background: none;
+  border: none;
+  padding: 6px;
+  color: var(--text-muted);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.list-header-extras:hover {
+  background: rgba(9,30,66,0.08);
+  color: var(--text-main);
+}
+
+.list-cards {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 8px;
+  min-height: 10px;
+}
+
+/* List Card */
+.list-card {
+  background: var(--card-bg);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(9,30,66,0.25);
+  cursor: pointer;
+  margin-bottom: 8px;
+  padding: 6px 8px 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-card:hover {
+  background: #f4f5f7;
+}
+
+.list-card.dragging {
+  opacity: 0.5;
+  background: #e4e6ea;
+}
+
+.card-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.card-label {
+  height: 8px;
+  width: 40px;
+  border-radius: 4px;
+}
+
+.list-card-title {
+  color: var(--text-main);
+  margin-bottom: 4px;
+  word-wrap: break-word;
+}
+
+.list-card-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+
+.card-badges {
+  display: flex;
+  gap: 4px;
+}
+
+.card-badge {
+  color: var(--text-muted);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.card-badge.is-due-past {
+  color: white;
+  background: #ec2f4b;
+  padding: 0 4px;
+  border-radius: 3px;
+}
+
+.card-members {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-left: -4px;
+}
+
+.list-footer {
+  padding: 8px;
+}
+
+.add-card-btn {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 4px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.add-card-btn:hover {
+  background: rgba(9,30,66,0.08);
+  color: var(--text-main);
+}
+
+.add-list-wrapper {
+  width: 272px;
+  flex-shrink: 0;
+}
+
+.add-list-btn {
+  background: rgba(255,255,255,0.24);
+  color: white;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.add-list-btn:hover {
+  background: rgba(255,255,255,0.32);
+}
+
+/* Modals */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.64);
+  z-index: 100;
+}
+
+.modal-content {
+  background: #f4f5f7;
+  width: 768px;
+  max-width: 90%;
+  margin: 48px auto;
+  border-radius: 2px;
+  position: relative;
+  padding: 16px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 24px;
+  color: #42526e;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* Card Detail Modal */
+.modal-header-trello {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-right: 32px;
+}
+
+.modal-icon {
+  font-size: 20px;
+  color: #42526e;
+  padding-top: 4px;
+}
+
+.trello-title-input {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: transparent;
+  border: 2px solid transparent;
+  width: 100%;
+  padding: 4px;
+  border-radius: 3px;
+}
+
+.trello-title-input:focus {
+  background: white;
+  border-color: var(--trello-blue);
+}
+
+.in-list-text {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-left: 6px;
+}
+
+.card-layout {
+  display: flex;
+  gap: 20px;
+}
+
+.card-main {
+  flex: 1;
+}
+
+.card-module {
+  margin-bottom: 24px;
+}
+
+.module-title {
+  font-size: 16px;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+.labels-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.modal-label {
+  height: 32px;
+  width: 48px;
+  border-radius: 3px;
+}
+
+.trello-btn {
+  background: rgba(9,30,66,0.04);
+  color: var(--text-main);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.trello-btn:hover {
+  background: rgba(9,30,66,0.08);
+}
+
+.trello-textarea {
+  width: 100%;
+  background: rgba(9,30,66,0.04);
+  border: none;
+  border-radius: 3px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-main);
+  min-height: 60px;
+  resize: vertical;
+}
+
+.trello-textarea:focus {
+  background: white;
+  box-shadow: inset 0 0 0 2px var(--trello-blue);
+  outline: none;
+}
+
+.comment-form-trello {
+  margin-left: 32px;
+}
+
+.comment-form-trello input {
+  width: 100%;
+  background: white;
+  border: 1px solid #dfe1e6;
+  padding: 8px 12px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+
+.activity-feed {
+  margin-left: 32px;
+  margin-top: 16px;
+}
+
+.activity-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.activity-content {
+  background: white;
+  border: 1px solid #dfe1e6;
+  border-radius: 3px;
+  padding: 8px 12px;
+  width: 100%;
+}
+
+.activity-user {
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.activity-time {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.activity-action {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.card-sidebar {
+  width: 168px;
+  flex-shrink: 0;
+}
+
+.sidebar-title {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.sidebar-btn {
+  width: 100%;
+  background: rgba(9,30,66,0.04);
+  color: var(--text-main);
+  border: none;
+  text-align: left;
+  padding: 6px 12px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.sidebar-btn:hover {
+  background: rgba(9,30,66,0.08);
+}
+
+.trello-input {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #dfe1e6;
+  border-radius: 3px;
+}
+
+.trello-input:focus {
+  border-color: var(--trello-blue);
+  outline: none;
+}
+
+/* Notifications Dropdown */
+.notifications-dropdown {
+  position: relative;
+}
+
+#notif-badge {
+  position: absolute;
+  top: -4px; right: -4px;
+  background: #ec2f4b;
+  color: white;
+  border-radius: 50%;
+  padding: 0 4px;
+  font-size: 10px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0; top: 100%;
+  background: white;
+  min-width: 300px;
+  border-radius: 3px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  margin-top: 4px;
+  z-index: 1000;
+}
+
+.dropdown-content.show {
+  display: block;
+}
+
+.notif-item {
+  padding: 12px;
+  border-bottom: 1px solid #dfe1e6;
+  color: var(--text-main);
+}
+
+.notif-item.unread {
+  background: #e4f0f6;
+}
+
+.notif-time {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
