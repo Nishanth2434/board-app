@@ -66,7 +66,7 @@ This application is designed to run out-of-the-box without requiring a local Mon
    *(The server will start on port 5000 and automatically seed the database with demo users and populated boards).*
 
 4. **Open in your browser:**
-   Navigate to [http://localhost:5000](http://localhost:5000)
+   Navigate to https://board-app-snowy.vercel.app/
 
 ---
 
