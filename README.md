@@ -1,5 +1,7 @@
 # BoardApp — Collaborative Project Management Tool 🚀
 
+**🌍 Live Demo:** [https://board-app-snowy.vercel.app/](https://board-app-snowy.vercel.app/)
+
 A full-stack, real-time Kanban board application built as a visual and functional clone of Trello. This project fulfills all requirements for **TASK 3: Project Management Tool**, including the WebSocket real-time bonus.
 
 ---
