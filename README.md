@@ -4,6 +4,14 @@
 
 A full-stack, real-time Kanban board application built as a visual and functional clone of Trello. This project fulfills all requirements for **TASK 3: Project Management Tool**, including the WebSocket real-time bonus.
 
+## 📸 Screenshots
+
+| Login & Authentication | Board Dashboard |
+|:---:|:---:|
+| ![Login Screen](screenshots/1_login.png) | ![Dashboard](screenshots/2_dashboard.png) |
+| **Kanban Board View** | **Card Detail Modal** |
+| ![Board View](screenshots/3_board.png) | ![Card Modal](screenshots/4_card_modal.png) |
+
 ---
 
 ## 🎯 Features & Requirements Fulfilled
